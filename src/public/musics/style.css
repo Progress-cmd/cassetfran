@@ -1,0 +1,301 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-musics {
+    display: flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    justify-content: space-around;
+    padding-top: 25px;
+}
+
+.header-musics > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 30px;
+    width: 150px;
+}
+
+.header-musics > a > span:first-child {
+    margin-right: 10px;
+}
+
+.header-musics a:hover {
+    background: #EEE;
+}
+
+@media (max-width: 600px) {
+    .home-btn .label {
+        display: none;
+    }
+    .share-btn .label {
+        display: none;
+    }
+    .add-btn .label {
+        display: none;
+    }
+    .login-btn .label {
+        display: none;
+    }
+    .search-entry {
+        width: 100px;
+    }
+    .header-musics > a > span:first-child {
+        margin-right: 0;
+    }
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background: lightgray;
+    border-radius: 30px;
+    border: solid 1px transparent;
+}
+
+.search-form:focus-within {
+    border: 1px solid black;
+}
+
+.search-entry {
+    background: none;
+    border: none;
+    height: 20px;
+    margin-left: 15px;
+}
+
+.search-entry:focus {
+    outline: none;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    height: 40px;
+    width: 40px;
+    padding: 7px;
+    border-radius: 50%;
+}
+
+.search-btn:hover {
+    background: #EEE;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px 50px 30px 50px;
+}
+
+.propositions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.propositions > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    width: 25%;
+    padding: 10px;
+}
+
+.propositions > div > .btn {
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.propositions img {
+    margin-right: 15px;
+    height: 100%;
+    width: auto;
+}
+
+.proposition {
+    display: flex;
+    align-items: center;
+}
+
+.proposition:hover {
+    background: #DDD;
+}
+
+.proposition > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.proposition .nameTrack {
+    color: gray;
+}
+
+.container-music {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.infos {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-rows: 1fr 1fr;
+    width: 70%;
+    gap: 15px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.infos-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.artists-infos, .playlists-infos, .listened-infos {
+    background: #eee;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 16px;
+}
+
+.table .header {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.row span {
+    flex: 1;
+}
+
+.img-playlists-infos {
+    flex: 0 0 60px;
+}
+
+
+.listen {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.info-listen {
+    display: flex;
+    align-items: center;
+    padding-top: 35px;
+    flex-direction: column;
+    background: #32323d;
+    border-radius: 10px 10px 0 0;
+    color: white;
+}
+
+.img-listen {
+    width: 75%;
+    border-radius: 5%;
+}
+
+.name-listen {
+    font-size: 25px;
+    padding-top: 10px;
+}
+
+.artist-listen {
+    font-size: 18px;
+    padding-top: 10px;
+}
+
+.audio-listen {
+    margin: 20px 0 35px 0;
+}
+
+.button-listen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    background: #5772ff;
+    border-radius: 0 0 10px 10px;
+}
+
+.button-listen > div {
+    padding-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-listen > div > button {
+    background: #EEE;
+    border-radius: 50%;
+    border: black solid 1px;
+    height: 50px;
+    width: 50px;
+}
+
+.button-listen > div > button:hover {
+    background: #DDD;
+}
+
+.button-listen > div > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #CCC;
+    border-radius: 50%;
+    border: black solid 1px;
+    height: 50px;
+    width: 50px;
+}
+
+.button-listen > div > span:hover {
+    background: #BBB;
+}

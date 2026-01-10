@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src/public:/var/www/html/public  # volume monté pour dev
+      - ./src/downloads:/var/www/html/downloads  # garde les fichiers mp3 persistants
