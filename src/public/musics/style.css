@@ -14,8 +14,8 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: white;
+    font-family: "Roboto Light", sans-serif;
+    background-color: #e7e8fe;
     color: black;
 }
 
@@ -39,6 +39,8 @@ a {
     height: 40px;
     border-radius: 30px;
     width: 150px;
+    background: #f7f5ff;
+    color: #673ee6;
 }
 
 .header-musics > a > span:first-child {
@@ -73,13 +75,13 @@ a {
 .search-form {
     display: flex;
     align-items: center;
-    background: lightgray;
+    background: #f7f5ff;
     border-radius: 30px;
     border: solid 1px transparent;
 }
 
 .search-form:focus-within {
-    border: 1px solid black;
+    border: 1px solid #673ee6;
 }
 
 .search-entry {
@@ -95,6 +97,7 @@ a {
 
 .search-btn {
     background: none;
+    color: #673ee6;
     border: none;
     height: 40px;
     width: 40px;
@@ -103,7 +106,7 @@ a {
 }
 
 .search-btn:hover {
-    background: #EEE;
+    background: #EFEFEF;
 }
 
 main {
@@ -148,10 +151,11 @@ main {
 .proposition {
     display: flex;
     align-items: center;
+    background: white;
 }
 
 .proposition:hover {
-    background: #DDD;
+    background: #EFEFEF;
 }
 
 .proposition > div {
@@ -161,7 +165,7 @@ main {
 }
 
 .proposition .nameTrack {
-    color: gray;
+    color: #AAA;
 }
 
 .container-music {
@@ -187,15 +191,23 @@ main {
 }
 
 .artists-infos, .playlists-infos, .listened-infos {
-    background: #eee;
+    background: white;
     border-radius: 10px;
     padding: 20px;
 }
 
-.table {
+.table:nth-child(n) {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+}
+
+.table .row:nth-child(2n) {
+    background: #f2f2f2;
+}
+
+.table .row:nth-child(2n+1) {
+    background: #ffffff;
 }
 
 .row {
@@ -209,6 +221,23 @@ main {
 .table .header {
     font-weight: 600;
     font-size: 20px;
+    height: 70px;
+}
+
+.table .header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f5ff;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: none;
+    color: #673ee6;
+}
+
+.table .header button:hover {
+    background: #EFEFEF;
 }
 
 .row span {
@@ -233,7 +262,7 @@ main {
     align-items: center;
     padding-top: 35px;
     flex-direction: column;
-    background: #32323d;
+    background: #673ee6;
     border-radius: 10px 10px 0 0;
     color: white;
 }
@@ -262,7 +291,7 @@ main {
     flex-direction: column;
     align-items: center;
     flex: 1;
-    background: #5772ff;
+    background: white;
     border-radius: 0 0 10px 10px;
 }
 
@@ -274,28 +303,25 @@ main {
 }
 
 .button-listen > div > button {
-    background: #EEE;
+    background: #f7f5ff;
     border-radius: 50%;
-    border: black solid 1px;
+    border: none;
+    color: #673ee6;
     height: 50px;
     width: 50px;
 }
 
 .button-listen > div > button:hover {
-    background: #DDD;
+    background: #EFEFEF;
 }
 
-.button-listen > div > span {
+.button-listen > div:nth-child(2    ) > button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #CCC;
-    border-radius: 50%;
-    border: black solid 1px;
-    height: 50px;
-    width: 50px;
+    border-radius: 15%;
 }
 
 .button-listen > div > span:hover {
-    background: #BBB;
+    background: #EFEFEF;
 }

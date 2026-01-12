@@ -7,14 +7,13 @@ if (
 ) {
     die('Token invalide');
 }
-
 // Récupération des données
 $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
 $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 
 // Connexion à la base de données
-include_once "../includes/config.php";
-$pdo = new PDO("mysql:host=".config::HOST.";dbname=".config::DBNAME, config::USER, config::PASSWORD);
+include_once "../config.php";
+$pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
 $req = $pdo->prepare("SELECT id, username, email, password_hash FROM users WHERE email = :email");
 $req->bindValue(':email', $email);

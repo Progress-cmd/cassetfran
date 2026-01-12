@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Music Downloader</title>
-</head>
-<body>
+<?php include './header.php'; ?>
 
-<form method="POST" action="/actions/download.php">
-    <input type="url" name="url" placeholder="Lien YouTube Music" required>
-    <button type="submit">Télécharger</button>
-</form>
+<main>
+    <div id="apps">
+        <a href="./musics/index.php" class="btn musics"><div>Musique</div>Power</a>
+        <a href="#" class="btn games"><div>Jeux</div>Time</a>
+        <a href="#" class="btn chat"><div>Chat</div>Space</a>
+        <a href="#" class="btn galerie"><div>Galerie</div>Mind</a>
+        <a href="#" class="btn calendar"><div>Calendrier</div>Reality</a>
+        <a href="#" class="btn movies"><div>Films</div>Soul</a>
+    </div>
+</main>
 
-</body>
-</html>
+<?php include './footer.php'; ?>

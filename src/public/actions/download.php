@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['url'])) {
 }
 
 $url = escapeshellarg($_POST['url']);
-$downloadDir = '/var/www/html/downloads';  // chemin absolu dans le conteneur
+$downloadDir = '/var/www/html/public/downloads';  // chemin absolu dans le conteneur
 
 $cmd = "yt-dlp -x --audio-format mp3 --audio-quality 0 -o \"$downloadDir/%(title)s.%(ext)s\" $url 2>&1";
 

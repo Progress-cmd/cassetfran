@@ -2,8 +2,8 @@
 
 <main>
     <?php
-    include_once "../includes/config.php";
-    $pdo = new PDO("mysql:host=".config::HOST.";dbname=".config::DBNAME, config::USER, config::PASSWORD);
+    include_once "../config.php";
+    $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
     $req = $pdo->prepare("SELECT id FROM tracks ORDER BY RAND() LIMIT 8");
     $req->execute();
@@ -20,8 +20,8 @@
             $req->execute();
 
             $track = $req->fetchAll();
-
-            echo '<div><button class="btn proposition"><img src="../../data/pictures/'.basename($track[0]["img_path"]).'" alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
+            $imgPath = str_replace('C:\\Users\\Haspot\\Documents\\01_Perso\\Codes\\Projets\\cassetfran\\data\\pictures\\', '',$track[0]["img_path"]);
+            echo '<div><button class="btn proposition"><img src="../downloads/pictures/'.$imgPath.'" alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
         }
         ?>
     </section>
@@ -30,10 +30,10 @@
             <article class="playlists-infos">
                 <div class="table">
                     <div class="row header">
-                        <span>Image</span>
-                        <span>Nom</span>
-                        <span>Créé par</span>
-                        <span>Taille</span>
+                        <span>Playlists</span>
+                        <button class="btn">
+                            <span class="material-symbols-outlined">add</span>
+                        </button>
                     </div>
                     <?php
                         $req = $pdo->prepare("SELECT playlists.id, name, username FROM playlists LEFT JOIN users ON playlists.created_by_id = users.id");
@@ -67,10 +67,10 @@
         </section>
         <section class="listen">
             <article class="info-listen">
-                <img class="img-listen" src="../../data/pictures/In%20My%20Blood.jpg" alt="image"/>
+                <img class="img-listen" src="../downloads/pictures/In%20My%20Blood.jpg" alt="image"/>
                 <div class="name-listen">In My Blood</div>
                 <div class="artist-listen">The Score</div>
-                <audio class="audio-listen" controls src="../../data/musics/In%20My%20Blood%20-%20The%20Score.mp3"></audio>
+                <audio class="audio-listen" controls src="../downloads/musics/In%20My%20Blood%20-%20The%20Score.mp3"></audio>
             </article>
             <article class="button-listen">
                 <div>
@@ -93,12 +93,18 @@
                     </button>
                 </div>
                 <div>
-                    <!--            <span class="material-symbols-outlined">volume_off</span>-->
-                    <span class="material-symbols-outlined">volume_up</span>
-                    <!--            <span class="material-symbols-outlined">playlist_play</span>-->
-                    <span class="material-symbols-outlined">queue_music</span>
-                    <!--            <span class="material-symbols-outlined">playlist_remove</span>-->
-                    <span class="material-symbols-outlined">more_vert</span>
+                    <button>
+                        <!--            <span class="material-symbols-outlined">volume_off</span>-->
+                        <span class="material-symbols-outlined">volume_up</span>
+                    </button>
+                    <button>
+                        <!--            <span class="material-symbols-outlined">playlist_play</span>-->
+                        <span class="material-symbols-outlined">queue_music</span>
+                        <!--            <span class="material-symbols-outlined">playlist_remove</span>-->
+                    </button>
+                    <button>
+                        <span class="material-symbols-outlined">more_vert</span>
+                    </button>
                 </div>
             </article>
         </section>

@@ -9,7 +9,7 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
 <main>
     <div class="container-connexion">
         <h2>Connection :</h2>
-        <form action="./actions/connection.php" method="POST">
+        <form action="actions/login.php" method="POST">
             <label>Email :</label>
             <input type="email" name="email" required>
 
