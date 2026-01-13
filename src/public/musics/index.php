@@ -21,7 +21,7 @@
 
             $track = $req->fetchAll();
             $imgPath = str_replace('C:\\Users\\Haspot\\Documents\\01_Perso\\Codes\\Projets\\cassetfran\\data\\pictures\\', '',$track[0]["img_path"]);
-            echo '<div><button class="btn proposition"><img src="../downloads/pictures/'.$imgPath.'" alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
+            echo '<div><button class="proposition"><img src="../downloads/pictures/'.$imgPath.'" alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
         }
         ?>
     </section>
@@ -31,9 +31,9 @@
                 <div class="table">
                     <div class="row header">
                         <span>Playlists</span>
-                        <button class="btn">
+                        <a href="./creationPlaylist.php" class="btn">
                             <span class="material-symbols-outlined">add</span>
-                        </button>
+                        </a>
                     </div>
                     <?php
                         $req = $pdo->prepare("SELECT playlists.id, name, username FROM playlists LEFT JOIN users ON playlists.created_by_id = users.id");
@@ -74,35 +74,35 @@
             </article>
             <article class="button-listen">
                 <div>
-                    <button class="relisten-listen">
+                    <button class="relisten-listen btn">
                         <span class="material-symbols-outlined">repeat</span>
     <!--                    <span class="material-symbols-outlined">repeat_one</span>-->
                     </button>
-                    <button class="before-listen">
+                    <button class="before-listen btn">
                         <span class="material-symbols-outlined">skip_previous</span>
                     </button>
-                    <button class="play-listen">
+                    <button class="play-listen btn">
                         <span class="material-symbols-outlined">play_arrow</span>
     <!--                    <span class="material-symbols-outlined">pause</span>-->
                     </button>
-                    <button class="after-listen">
+                    <button class="after-listen btn">
                         <span class="material-symbols-outlined">skip_next</span>
                     </button>
-                    <button class="random-listen">
+                    <button class="random-listen btn">
                         <span class="material-symbols-outlined">shuffle</span>
                     </button>
                 </div>
                 <div>
-                    <button>
+                    <button class="btn">
                         <!--            <span class="material-symbols-outlined">volume_off</span>-->
                         <span class="material-symbols-outlined">volume_up</span>
                     </button>
-                    <button>
+                    <button class="btn">
                         <!--            <span class="material-symbols-outlined">playlist_play</span>-->
                         <span class="material-symbols-outlined">queue_music</span>
                         <!--            <span class="material-symbols-outlined">playlist_remove</span>-->
                     </button>
-                    <button>
+                    <button class="btn">
                         <span class="material-symbols-outlined">more_vert</span>
                     </button>
                 </div>

@@ -24,6 +24,32 @@ a {
     color: inherit;
 }
 
+button {
+    border: none;
+    background: none;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f5ff;
+    color: #673ee6;
+    height: 50px;
+    width: 50px;
+    border: none;
+}
+
+.btn:hover {
+    background: #EEE;
+}
+
+.btn > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header-musics {
     display: flex;
     flex-shrink: 0;
@@ -33,22 +59,13 @@ a {
 }
 
 .header-musics > a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 40px;
     border-radius: 30px;
     width: 150px;
-    background: #f7f5ff;
-    color: #673ee6;
 }
 
 .header-musics > a > span:first-child {
     margin-right: 10px;
-}
-
-.header-musics a:hover {
-    background: #EEE;
 }
 
 @media (max-width: 600px) {
@@ -97,16 +114,10 @@ a {
 
 .search-btn {
     background: none;
-    color: #673ee6;
-    border: none;
     height: 40px;
     width: 40px;
     padding: 7px;
     border-radius: 50%;
-}
-
-.search-btn:hover {
-    background: #EFEFEF;
 }
 
 main {
@@ -134,7 +145,7 @@ main {
     padding: 10px;
 }
 
-.propositions > div > .btn {
+.propositions > div > .proposition {
     height: 100%;
     width: 100%;
     border: none;
@@ -224,20 +235,8 @@ main {
     height: 70px;
 }
 
-.table .header button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f7f5ff;
+.table .header .btn {
     border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    border: none;
-    color: #673ee6;
-}
-
-.table .header button:hover {
-    background: #EFEFEF;
 }
 
 .row span {
@@ -303,25 +302,29 @@ main {
 }
 
 .button-listen > div > button {
-    background: #f7f5ff;
     border-radius: 50%;
-    border: none;
-    color: #673ee6;
-    height: 50px;
-    width: 50px;
 }
 
-.button-listen > div > button:hover {
-    background: #EFEFEF;
-}
-
-.button-listen > div:nth-child(2    ) > button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.button-listen > div:nth-child(2) > button {
     border-radius: 15%;
 }
 
-.button-listen > div > span:hover {
-    background: #EFEFEF;
+
+/*Création playlist*/
+.playlists-infos > form > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+}
+
+.playlists-infos > form > h2 {
+    margin-bottom: 15px;
+}
+
+.playlists-infos > form .btn {
+    font-size: 15px;
+    margin: 7px;
+    border-radius: 5px;
+    width: 70px;
 }
