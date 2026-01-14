@@ -31,7 +31,7 @@ if (!isset($_SESSION['user'])) {
         <input type="text" class="search-entry" placeholder="Search">
         <button type="submit" class="btn search-btn"><span class="material-symbols-outlined">search</span></button>
     </form>
-    <a href="./ajoutMusic.php" class="btn add-btn">
+    <a href="./ajoutMusic.php?etape=0" class="btn add-btn">
         <span class="material-symbols-outlined">music_note_add</span>
         <span class="label">Add music</span>
     </a>

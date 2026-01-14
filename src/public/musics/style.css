@@ -42,6 +42,7 @@ button {
 
 .btn:hover {
     background: #EEE;
+    cursor: pointer;
 }
 
 .btn > span {
@@ -157,6 +158,8 @@ main {
     margin-right: 15px;
     height: 100%;
     width: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .proposition {
@@ -167,6 +170,7 @@ main {
 
 .proposition:hover {
     background: #EFEFEF;
+    cursor: pointer;
 }
 
 .proposition > div {
@@ -207,10 +211,11 @@ main {
     padding: 20px;
 }
 
-.table:nth-child(n) {
+.table > .body {
     width: 100%;
-    height: 100%;
-    overflow-y: scroll;
+    height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 .table .row:nth-child(2n) {
@@ -239,8 +244,26 @@ main {
     border-radius: 50%;
 }
 
-.row span {
+.table .row > span:nth-last-child(n+2) {
     flex: 1;
+}
+
+.table > .body > .row > .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: black;
+}
+
+.table > .body > .row > .btn > span {
+    border-radius: 15%;
+    height: 100%;
+    width: 100%;
+}
+
+.table > .body > .row > .btn:hover > span {
+    background: #DDD;
 }
 
 .img-playlists-infos {
@@ -267,8 +290,10 @@ main {
 }
 
 .img-listen {
-    width: 75%;
+    height: 250px;
     border-radius: 5%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .name-listen {
@@ -309,22 +334,30 @@ main {
     border-radius: 15%;
 }
 
-
-/*Création playlist*/
-.playlists-infos > form > div {
+.container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/*Création playlist*/
+.container > form {
     width: 400px;
 }
 
-.playlists-infos > form > h2 {
+.container > form > h2 {
     margin-bottom: 15px;
 }
 
-.playlists-infos > form .btn {
+.container > form .btn {
     font-size: 15px;
     margin: 7px;
     border-radius: 5px;
     width: 70px;
+}
+
+.container img {
+    height: 100px;
 }

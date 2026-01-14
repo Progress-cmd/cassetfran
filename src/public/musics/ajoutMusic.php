@@ -1,6 +1,99 @@
-<?php include './header.php'; ?>
+<?php include './header.php';
 
-<form method="POST" action="../actions/download.php">
-    <input type="url" name="url" placeholder="Lien YouTube Music" required>
-    <button type="submit">Télécharger</button>
-</form>
+$etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
+
+?>
+
+<main>
+    <?php if (!$etape)
+        {
+            $_SESSION['token'] = bin2hex(random_bytes(32));
+            ?>
+            <article class="container">
+                <form method="POST" action="./ajoutMusic.php?etape=1">
+                    <input type="url" name="url" placeholder="Lien YouTube Music" required>
+
+                    <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+
+                    <button type="submit" class="btn">Voir</button>
+                    <a href="./index.php" class="btn">Retour</a>
+                </form>
+            </article>
+            <?php
+        }
+        else if ($etape)
+        {
+            if (
+                    !isset($_POST['token'], $_SESSION['token']) ||
+                    $_POST['token'] !== $_SESSION['token']
+            ) {
+                die('Token invalide');
+            }
+
+            $_SESSION['token'] = bin2hex(random_bytes(32));
+
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['url']))
+            {
+                http_response_code(400);
+                exit('Requête invalide');
+            }
+
+            $cmd = "yt-dlp --skip-download --no-playlist --dump-json ".escapeshellarg($_POST['url']);
+
+            $json = shell_exec($cmd);
+            $data = json_decode($json, true);
+
+            $title = $data['track'] ?? null;
+            $artist = $data['artist'] ?? null;
+            $album = $data['album'] ?? null;
+            $duration = $data['duration'] ?? 0;
+            $thumb = $data['thumbnails'][count($data['thumbnails'])-1]['url'] ?? null;
+
+            // Connexion à la base de données
+            include_once "../config.php";
+            $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
+
+            $req = $pdo->prepare("SELECT title FROM tracks WHERE title = :title");
+            $req->bindParam(':title', $title);
+            $req->execute();
+
+            if (!$req->fetch())
+            {
+                ?>
+                <article class="container">
+                    <form method="POST" action="../actions/addMusic.php">
+                        <label>Title :</label>
+                        <input type="text" value="<?php echo $title ?>" name="title" readonly>
+                        <br>
+
+                        <label>Artist :</label>
+                        <input type="text" value="<?php echo $artist ?>" name="artist" readonly>
+                        <br>
+
+                        <label>Album :</label>
+                        <input type="text" value="<?php echo $album ?>" name="album" readonly>
+                        <br>
+
+                        <label>Durée :</label>
+                        <input type="number" value="<?php echo $duration ?>" name="duration" readonly>
+                        <br>
+
+                        <img src="<?php echo $thumb ?>" alt="image">
+                        <input type="hidden" value="<?php echo $thumb ?>" name="miniature">
+
+                        <input type="hidden" value="<?php echo $_POST['url'] ?>" name="url">
+                        <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+
+                        <button type="submit" class="btn">Télécharger</button>
+                        <a href="./index.php" class="btn">Retour</a>
+                    </form>
+                </article>
+                <?php
+            }
+            else
+            {
+                echo "<i>".$title."</i> est déjà dans la base de donnée";
+            }
+        }
+        ?>
+</main>

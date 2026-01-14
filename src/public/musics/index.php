@@ -20,8 +20,8 @@
             $req->execute();
 
             $track = $req->fetchAll();
-            $imgPath = str_replace('C:\\Users\\Haspot\\Documents\\01_Perso\\Codes\\Projets\\cassetfran\\data\\pictures\\', '',$track[0]["img_path"]);
-            echo '<div><button class="proposition"><img src="../downloads/pictures/'.$imgPath.'" alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
+
+            echo '<div><button class="proposition"><img src='.$track[0]["img_path"].' alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
         }
         ?>
     </section>
@@ -35,42 +35,81 @@
                             <span class="material-symbols-outlined">add</span>
                         </a>
                     </div>
-                    <?php
-                        $req = $pdo->prepare("SELECT playlists.id, name, username FROM playlists LEFT JOIN users ON playlists.created_by_id = users.id");
-                        $req->execute();
-
-                        $playlists = $req->fetchAll();
-
-                        foreach ($playlists as $playlist)
-                        {
-                            $req = $pdo->prepare("SELECT COUNT(*) FROM track__playlist WHERE playlist_id = :playlist");
-                            $req->bindParam(":playlist", $playlist["id"]);
+                    <div class="body">
+                        <?php
+                            $req = $pdo->prepare("SELECT playlists.id, name, username FROM playlists LEFT JOIN users ON playlists.created_by_id = users.id");
                             $req->execute();
 
-                            $occurrence = $req->fetchColumn();
-                            ?>
-                            <div class="row">
-                                <span class="img-playlists-infos material-symbols-outlined">favorite</span>
-                                <span><?php echo $playlist["name"]; ?></span>
-                                <span><?php echo $playlist["username"]; ?></span>
-                                <span><?php if ($occurrence > 1) { echo $occurrence.' musiques';} else { echo $occurrence.' musique';} ?></span>
-                            </div>
-                            <?php
-                        }
-                    ?>
+                            $playlists = $req->fetchAll();
+
+                            foreach ($playlists as $playlist)
+                            {
+                                $req = $pdo->prepare("SELECT COUNT(*) FROM track__playlist WHERE playlist_id = :playlist");
+                                $req->bindParam(":playlist", $playlist["id"]);
+                                $req->execute();
+
+                                $occurrence = $req->fetchColumn();
+                                ?>
+                                <div class="row">
+                                    <span class="img-playlists-infos material-symbols-outlined">
+                                    <?php if ($playlist["name"] == "Favorite Tracks") { echo "favorite"; }
+                                        else if ($playlist["name"] == "Instru Piano") { echo "piano"; } ?>
+                                    </span>
+                                    <span><?php echo $playlist["name"]; ?></span>
+                                    <span><?php echo $playlist["username"]; ?></span>
+                                    <span><?php if ($occurrence > 1) { echo $occurrence.' musiques';} else { echo $occurrence.' musique';} ?></span>
+                                    <a href="#" class="btn"><span class="material-symbols-outlined">more_vert</span></a>
+                                </div>
+                                <?php
+                            }
+                        ?>
+                    </div>
                 </div>
             </article>
             <div class="infos-bottom">
-                <article class="artists-infos">artists</article>
+                <article class="artists-infos">
+                    <div class="table">
+                        <div class="row header">
+                            <span>Artists</span>
+                            <a href="#" class="btn">
+                                <span class="material-symbols-outlined">add</span>
+                            </a>
+                        </div>
+                        <div class="body">
+                            <?php
+                            $req = $pdo->prepare("SELECT name FROM artists");
+                            $req->execute();
+
+                            $artists = $req->fetchAll();
+
+                            foreach ($artists as $artist)
+                            {
+                                ?>
+                                <div class="row">
+                                    <span><?php echo $artist["name"]; ?></span>
+                                    <a href="#" class="btn"><span class="material-symbols-outlined">more_vert</span></a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </article>
                 <article class="listened-infos">In My Blood</article>
             </div>
         </section>
         <section class="listen">
+            <?php
+            $req = $pdo->prepare("SELECT * FROM tracks LEFT JOIN artist__track ON artist__track.track_id = tracks.id LEFT JOIN artists ON artists.id = artist__track.artist_id WHERE title='In My Blood'");
+            $req->execute();
+
+            $track = $req->fetchAll();
+            ?>
             <article class="info-listen">
-                <img class="img-listen" src="../downloads/pictures/In%20My%20Blood.jpg" alt="image"/>
-                <div class="name-listen">In My Blood</div>
-                <div class="artist-listen">The Score</div>
-                <audio class="audio-listen" controls src="../downloads/musics/In%20My%20Blood%20-%20The%20Score.mp3"></audio>
+                <img class="img-listen" src="<?php echo $track[0]["img_path"]?>" alt="image"/>
+                <div class="name-listen"><?php echo $track[0]["title"]?></div>
+                <div class="artist-listen"><?php echo $track[0]["name"]?></div>
+                <audio class="audio-listen" controls src="../downloads/musics/In%20My%20Blood.mp3"></audio>
             </article>
             <article class="button-listen">
                 <div>
