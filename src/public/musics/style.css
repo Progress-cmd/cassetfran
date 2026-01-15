@@ -361,6 +361,10 @@ main {
     padding: 20px;
 }
 
+.row-btn {
+    cursor: pointer;
+}
+
 /*Création playlist*/
 .container > form {
     width: 400px;

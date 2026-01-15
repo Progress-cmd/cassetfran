@@ -95,7 +95,15 @@
                         </div>
                     </div>
                 </article>
-                <article class="listened-infos">In My Blood</article>
+                <article class="listened-infos">
+                    <div class="table queue">
+                        <div class="row header">
+                            <span>Liste d'attente</span>
+                        </div>
+                        <div class="body" id="queueList">
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
         <section class="listen">
@@ -124,14 +132,16 @@
             </script>
 
             <article class="info-listen">
-                <img class="img-listen" src="" alt="image"/>
+                <img class="img-listen" alt="image">
                 <div class="name-listen"></div>
                 <div class="artist-listen"></div>
-                <audio class="audio-listen" id="audio" src=""></audio>
+
+                <audio id="audio" class="audio-listen"></audio>
+
                 <div class="audio-slide">
-                    <div class="audio-progress" id="audioProgress">0</div>
+                    <div class="audio-progress">0:00</div>
                     <input type="range" id="progress" value="0" min="0" max="100">
-                    <div class="audio-total"></div>
+                    <div class="audio-total">0:00</div>
                 </div>
             </article>
             <article class="button-listen">
@@ -154,9 +164,8 @@
                     </button>
                 </div>
                 <div>
-                    <button class="btn">
-                        <!--            <span class="material-symbols-outlined">volume_off</span>-->
-                        <span class="material-symbols-outlined">volume_up</span>
+                    <button class="btn" id="volume">
+                        <span class="material-symbols-outlined" id="volumeIcon">volume_up</span>
                     </button>
                     <button class="btn">
                         <!--            <span class="material-symbols-outlined">playlist_play</span>-->
@@ -170,16 +179,67 @@
             </article>
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
+                    const queueList = document.getElementById("queueList");
 
                     const audio = document.getElementById("audio");
                     const progress = document.getElementById("progress");
                     const playBtn = document.getElementById("play");
                     const playIcon = document.getElementById("playIcon");
-                    const audioTime = document.getElementById("audioProgress");
-                    const audioStart = document.getElementById("previous");
-                    const audioEnd = document.getElementById("next");
+
+                    const audioCurrent = document.querySelector(".audio-progress");
+                    const audioTotal = document.querySelector(".audio-total");
+
+                    const prevBtn = document.getElementById("previous");
+                    const nextBtn = document.getElementById("next");
+
+                    const titleEl = document.querySelector(".name-listen");
+                    const artistEl = document.querySelector(".artist-listen");
+                    const imgEl = document.querySelector(".img-listen");
+
+                    const volumeBtn = document.getElementById("volume");
+                    const volumeIcon = document.getElementById("volumeIcon");
 
                     let currentIndex = 0;
+
+                    function renderQueue() {
+                        queueList.innerHTML = "";
+
+                        playlist.forEach((track, index) => {
+                            const row = document.createElement("div");
+                            row.classList.add("row");
+                            row.classList.add("row-btn");
+
+                            row.innerHTML = `<span>${track.title}</span>
+                                            <span>${track.artist}</span>
+                                            <a href="#" class="btn"><span class="material-symbols-outlined">more_vert</span></a>`;
+
+                            if (index === currentIndex) {
+                                row.classList.add("active");
+                            }
+
+                            row.addEventListener("click", () => {
+                                currentIndex = index;
+                                loadTrack(currentIndex);
+                                audio.play();
+                                playIcon.textContent = "pause";
+                                renderQueue();
+                            });
+
+                            queueList.appendChild(row);
+                        });
+                    }
+
+                    document.querySelector(".queue .row.active")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "nearest"
+                    });
+
+
+                    function formatTime(seconds) {
+                        const m = Math.floor(seconds / 60);
+                        const s = Math.floor(seconds % 60).toString().padStart(2, "0");
+                        return `${m}:${s}`;
+                    }
 
                     function loadTrack(index) {
                         const track = playlist[index];
@@ -187,16 +247,15 @@
                         audio.src = track.src;
                         audio.load();
 
-                        document.querySelector(".name-listen").textContent = track.title;
-                        document.querySelector(".artist-listen").textContent = track.artist;
-                        document.querySelector(".img-listen").src = track.img;
-                        document.querySelector(".audio-total").textContent = track.duration + " secondes";
+                        titleEl.textContent = track.title;
+                        artistEl.textContent = track.artist;
+                        imgEl.src = track.img;
 
                         progress.value = 0;
-                        audioTime.textContent = 0;
-
-                        audio.play();
-                        playIcon.textContent = "pause";
+                        audioCurrent.textContent = "0:00";
+                        audioTotal.textContent = "0:00";
+                        playIcon.textContent = "play_arrow";
+                        renderQueue();
                     }
 
                     playBtn.addEventListener("click", () => {
@@ -209,10 +268,15 @@
                         }
                     });
 
+                    audio.addEventListener("loadedmetadata", () => {
+                        audioTotal.textContent = formatTime(audio.duration);
+                    });
+
                     audio.addEventListener("timeupdate", () => {
                         if (!audio.duration) return;
+
                         progress.value = (audio.currentTime / audio.duration) * 100;
-                        audioTime.textContent = Math.floor(audio.currentTime);
+                        audioCurrent.textContent = formatTime(audio.currentTime);
                     });
 
                     progress.addEventListener("input", () => {
@@ -220,31 +284,46 @@
                     });
 
                     audio.addEventListener("ended", () => {
-                        currentIndex++;
-                        if (currentIndex >= playlist.length) currentIndex = 0;
-                        loadTrack(currentIndex);
+                        nextTrack(true);
                     });
 
-                    audioStart.addEventListener("click", () => {
-                        currentIndex--;
-                        if (currentIndex < 0) currentIndex = playlist.length - 1;
+                    function nextTrack(autoPlay = false) {
+                        currentIndex = (currentIndex + 1) % playlist.length;
                         loadTrack(currentIndex);
-                    });
+                        if (autoPlay) {
+                            audio.play();
+                            playIcon.textContent = "pause";
+                        }
+                    }
 
-                    audioEnd.addEventListener("click", () => {
-                        currentIndex++;
-                        if (currentIndex >= playlist.length) currentIndex = 0;
-                        loadTrack(currentIndex);
-                    });
-
-                    // chargement initial
-                    if (playlist.length > 0) {
+                    function prevTrack() {
+                        if (audio.currentTime > 3) {
+                            audio.currentTime = 0;
+                            return;
+                        }
+                        currentIndex =
+                            (currentIndex - 1 + playlist.length) % playlist.length;
                         loadTrack(currentIndex);
                     }
 
+                    nextBtn.addEventListener("click", () => nextTrack(true));
+                    prevBtn.addEventListener("click", prevTrack);
+
+                    if (playlist.length) {
+                        loadTrack(currentIndex);
+                    }
+
+                    volumeBtn.addEventListener("click", () => {
+                        if (audio.muted) {
+                            audio.muted = false;
+                            volumeIcon.textContent = "volume_up";
+                        } else {
+                            audio.muted = true;
+                            volumeIcon.textContent = "volume_off";
+                        }
+                    });
                 });
             </script>
-
         </section>
     </div>
 </main>
