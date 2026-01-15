@@ -14,7 +14,7 @@ $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
 include_once "../config.php";
 $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
-$req = $pdo->prepare("INSERT INTO playlists (name, created_by_id) VALUES (:name, :user)");
+$req = $pdo->prepare("INSERT INTO playlists (name, `created-by_id`) VALUES (:name, :user)");
 $req->bindParam(':name', $name);
 $req->bindParam(':user', $_SESSION['user']['id']);
 $req->execute();

@@ -30,7 +30,7 @@ if ($code !== 0) {
 include_once "../config.php";
 $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
-$req = $pdo->prepare("INSERT INTO tracks (title, duration, file_path, url, img_path, added_by_id) VALUES (:title, :duration, :file, :url, :img, :user)");
+$req = $pdo->prepare("INSERT INTO tracks (title, duration, file, url, img, `added-by_id`) VALUES (:title, :duration, :file, :url, :img, :user)");
 $req->bindParam(':title', $title);
 $req->bindParam(':duration', $duration);
 $req->bindParam(':file', $file);
@@ -45,7 +45,9 @@ $req = $pdo->prepare("SELECT id FROM artists WHERE name = :name");
 $req->bindParam(':name', $artist);
 $req->execute();
 
-if (!$req->fetch())
+$artistData = $req->fetch(PDO::FETCH_ASSOC);
+
+if ($artistData === false)
 {
     $req = $pdo->prepare("INSERT INTO artists (name) VALUES (:name)");
     $req->bindParam(':name', $artist);
@@ -55,7 +57,7 @@ if (!$req->fetch())
 }
 else
 {
-    $artist_id = intval($req->fetch()["id"]);
+    $artist_id = intval($artistData["id"]);
 }
 
 $req = $pdo->prepare("INSERT INTO artist__track (artist_id, track_id) VALUES (:artist_id, :track_id)");

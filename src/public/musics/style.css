@@ -334,6 +334,25 @@ main {
     border-radius: 15%;
 }
 
+.audio-listen > audio {
+    display: none;
+}
+
+.audio-slide {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.audio-slide > input {
+    margin: 15px;
+}
+
+.audio-progress {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .container {
     display: flex;
     align-items: center;
