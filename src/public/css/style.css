@@ -428,3 +428,266 @@ input[type="range"]::-webkit-slider-thumb {
     height: 50px;
     width: 50px;
 }
+
+/* --- RESPONSIVE MOBILE (Max 768px) --- */
+@media (max-width: 768px) {
+
+    /* --- GLOBAL & STRUCTURE --- */
+    main {
+        padding: 15px; /* Moins de padding sur mobile */
+        padding-bottom: 80px; /* Espace pour le mini-player en bas */
+        overflow-y: auto; /* Permet le scroll de la page */
+    }
+
+    /* --- HEADER --- */
+    .header-musics {
+        padding-top: 10px;
+        justify-content: space-between;
+    }
+
+    .header-musics > a {
+        width: 40px; /* Force les boutons ronds sans texte */
+    }
+
+    /* Cache le texte des boutons header sur mobile */
+    .header-musics .label {
+        display: none;
+    }
+
+    /* --- PROPOSITIONS (2 Lignes avec Scroll Horizontal) --- */
+    .propositions {
+        display: grid;
+        /* Force exactement 2 lignes de 80px de hauteur */
+        grid-template-rows: repeat(2, 80px);
+        /* Les éléments s'ajoutent en colonnes vers la droite (et non en ligne) */
+        grid-auto-flow: column;
+        /* Définit la largeur de chaque colonne (carte) */
+        grid-auto-columns: 280px;
+
+        gap: 10px;
+        overflow-x: auto; /* Active le scroll */
+        scroll-snap-type: x mandatory;
+        padding-bottom: 10px;
+
+        /* Reset de la hauteur pour qu'elle s'adapte au contenu de la grille */
+        height: auto;
+    }
+
+    .propositions > div {
+        /* On s'assure que l'élément prend toute la place de sa "case" grille */
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: start;
+        padding: 0; /* Ajustement du padding pour gagner de la place */
+    }
+
+    /* Optionnel : Ajustement de la carte elle-même pour qu'elle rentre bien */
+    .proposition {
+        border-radius: 10px; /* Un peu plus rond sur mobile */
+        width: 100%;
+    }
+
+    /* Masquer la barre de défilement (esthétique) */
+    .propositions::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* --- CONTENEUR MUSIQUE (Verticalisation) --- */
+    .container-music {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+        gap: 20px;
+    }
+
+    .infos {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .infos-bottom {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        gap: 20px;
+    }
+
+    /* --- TABLES (Playlists, Artistes, Queue) --- */
+    /* Ajustement des colonnes pour qu'elles ne soient pas écrasées */
+    .playlists-infos .row {
+        /* On simplifie l'affichage : Icône | Titre | (caché user) | Compteur | Btn */
+        grid-template-columns: 40px 1fr 0.5fr 40px;
+    }
+
+    /* Cacher le nom de l'utilisateur des playlists pour gagner de la place */
+    .playlists-infos .row span:nth-child(3) {
+        display: none;
+    }
+
+    /* Limiter la hauteur de la liste d'attente pour ne pas avoir une page infinie */
+    .listened-infos .body {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    /* --- LECTEUR (MINI BARRE & PLEIN ÉCRAN) --- */
+
+    /* État par défaut : Mini Player en bas */
+    .listen {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px; /* Hauteur réduite */
+        z-index: 1000;
+        margin: 0;
+        background: #f7f5ff; /* Fond clair pour le mini player */
+        border-top: 1px solid #ddd;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 10px;
+        box-sizing: border-box;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+
+    /* Restructuration interne pour le mode Mini */
+    .listen .info-listen {
+        padding-top: 0;
+        background: none;
+        color: black;
+        flex-direction: row;
+        width: 70%;
+        border-radius: 0;
+        align-items: center;
+    }
+
+    /* Image en mode mini : toute petite */
+    .listen .img-listen {
+        height: 50px;
+        width: 50px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .listen .name-listen, .listen .artist-listen {
+        font-size: 14px;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+    }
+
+    .listen .artist-listen {
+        font-size: 12px;
+        color: #666;
+    }
+
+    /* Cacher la barre de progression en mode mini */
+    .listen .audio-slide {
+        display: none;
+    }
+
+    /* Ajuster les boutons en mode mini */
+    .listen .button-listen {
+        padding-top: 0;
+        background: none;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .listen .button-listen > div {
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    /* Cacher les boutons non essentiels en mode mini (Shuffle, Repeat, Volume...) */
+    .listen .button-listen .relisten-listen,
+    .listen .button-listen .random-listen,
+    .listen .button-listen > div:nth-child(2) {
+        display: none;
+    }
+
+    /* --- ÉTAT EXPANDED (Plein écran au clic) --- */
+    .listen.expanded {
+        height: 100vh; /* Pleine hauteur */
+        flex-direction: column;
+        justify-content: flex-end;
+        background: white; /* Ou couleur de fond unie */
+        padding: 0;
+    }
+
+    .listen.expanded .info-listen {
+        width: 100%;
+        height: 60%;
+        background: #673ee6; /* Retour au violet */
+        color: white;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 0 0 20px 20px;
+        padding-top: 40px;
+    }
+
+    .listen.expanded .img-listen {
+        height: 250px;
+        width: 250px;
+        margin: 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .listen.expanded .name-listen {
+        font-size: 24px;
+        margin-top: 20px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .listen.expanded .artist-listen {
+        font-size: 18px;
+        color: #ddd;
+        text-align: center;
+    }
+
+    /* Réafficher la barre de progression */
+    .listen.expanded .audio-slide {
+        display: flex;
+        width: 90%;
+        margin-top: 30px;
+    }
+
+    .listen.expanded .button-listen {
+        height: 40%;
+        flex-direction: column;
+        padding-top: 20px;
+        display: grid;
+    }
+
+    /* Réafficher tous les boutons */
+    .listen.expanded .button-listen .relisten-listen,
+    .listen.expanded .button-listen .random-listen,
+    .listen.expanded .button-listen > div:nth-child(2) {
+        display: flex;
+    }
+
+    .listen.expanded .button-listen > div {
+        justify-content: space-around;
+    }
+
+    /* Ajout d'une petite flèche pour indiquer qu'on peut fermer (optionnel, via CSS content) */
+    .listen.expanded::before {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 5px;
+        background: rgba(255,255,255,0.3);
+        border-radius: 5px;
+        z-index: 1001;
+    }
+}

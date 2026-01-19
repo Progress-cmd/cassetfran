@@ -10,13 +10,17 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
             $_SESSION['token'] = bin2hex(random_bytes(32));
             ?>
             <article class="container">
-                <form method="POST" action="./ajoutMusic.php?etape=1">
-                    <input type="url" name="url" placeholder="Lien YouTube Music" required>
+                <form action="./ajoutMusic.php?etape=1" method="post">
+                    <h2>Ajout d'une musique</h2>
+                    <div>
+                        <label>URL (Youtube music) :</label>
+                        <input type="url" name="url" placeholder="Lien YouTube Music" required>
 
-                    <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                        <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 
-                    <button type="submit" class="btn">Voir</button>
-                    <a href="./index.php" class="btn">Retour</a>
+                        <button type="submit" class="btn">Voir</button>
+                        <a href="./index.php" class="btn">Retour</a>
+                    </div>
                 </form>
             </article>
             <?php
@@ -62,30 +66,33 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
                 ?>
                 <article class="container">
                     <form method="POST" action="../actions/addMusic.php">
-                        <label>Title :</label>
-                        <input type="text" value="<?php echo $title ?>" name="title" readonly>
-                        <br>
+                        <h2>Est-ce bien celle-ci ?</h2>
+                        <div>
+                            <label>Title :</label>
+                            <input type="text" value="<?php echo $title ?>" name="title" readonly>
+                            <br>
 
-                        <label>Artist :</label>
-                        <input type="text" value="<?php echo $artist ?>" name="artist" readonly>
-                        <br>
+                            <label>Artist :</label>
+                            <input type="text" value="<?php echo $artist ?>" name="artist" readonly>
+                            <br>
 
-                        <label>Album :</label>
-                        <input type="text" value="<?php echo $album ?>" name="album" readonly>
-                        <br>
+                            <label>Album :</label>
+                            <input type="text" value="<?php echo $album ?>" name="album" readonly>
+                            <br>
 
-                        <label>Durée :</label>
-                        <input type="number" value="<?php echo $duration ?>" name="duration" readonly>
-                        <br>
+                            <label>Durée :</label>
+                            <input type="number" value="<?php echo $duration ?>" name="duration" readonly>
+                            <br>
 
-                        <img src="<?php echo $thumb ?>" alt="image">
-                        <input type="hidden" value="<?php echo $thumb ?>" name="miniature">
+                            <img src="<?php echo $thumb ?>" alt="image">
+                            <input type="hidden" value="<?php echo $thumb ?>" name="miniature">
 
-                        <input type="hidden" value="<?php echo $_POST['url'] ?>" name="url">
-                        <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+                            <input type="hidden" value="<?php echo $_POST['url'] ?>" name="url">
+                            <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
 
-                        <button type="submit" class="btn">Télécharger</button>
-                        <a href="./index.php" class="btn">Retour</a>
+                            <button type="submit" class="btn">Télécharger</button>
+                            <a href="./index.php" class="btn">Retour</a>
+                        </div>
                     </form>
                 </article>
                 <?php

@@ -5,7 +5,7 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
 ?>
 
 <main>
-    <article class="playlists-infos">
+    <article class="container">
         <form action="../actions/createPlaylist.php" method="post">
             <h2>Création d'une playlist</h2>
             <div>

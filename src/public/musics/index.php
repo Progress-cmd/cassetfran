@@ -319,6 +319,41 @@
                             volumeIcon.textContent = "volume_off";
                         }
                     });
+
+                    // --- GESTION DU LECTEUR RESPONSIVE ---
+                    const listenSection = document.querySelector('.listen');
+                    const listenButtons = document.querySelectorAll('.listen button');
+                    const inputRanges = document.querySelectorAll('.listen input[type="range"]');
+
+                    listenSection.addEventListener('click', (e) => {
+                        // On vérifie si l'écran est petit (mode mobile)
+                        if (window.innerWidth <= 768) {
+                            // Si le lecteur est déjà ouvert, on le ferme si on clique en haut (sur l'image/titre)
+                            // OU si le lecteur est fermé, on l'ouvre.
+
+                            // Astuce : Si on clique sur un bouton (play/pause) ou la barre de progression, on ne veut PAS toggle l'écran
+                            let isInteractiveElement = false;
+
+                            // Vérifie si le clic vient d'un bouton ou d'un slider
+                            listenButtons.forEach(btn => {
+                                if(btn.contains(e.target)) isInteractiveElement = true;
+                            });
+                            inputRanges.forEach(input => {
+                                if(input === e.target) isInteractiveElement = true;
+                            });
+
+                            if (!isInteractiveElement) {
+                                listenSection.classList.toggle('expanded');
+
+                                // Petit hack pour empêcher le scroll du body quand le lecteur est ouvert
+                                if(listenSection.classList.contains('expanded')) {
+                                    document.body.style.overflow = 'hidden';
+                                } else {
+                                    document.body.style.overflow = '';
+                                }
+                            }
+                        }
+                    });
                 });
             </script>
         </section>
