@@ -116,37 +116,6 @@ main
     width: 40px;
 }
 
-@media (max-width: 1439px)
-{
-    .home-btn .label, .share-btn .label, .add-btn .label, .login-btn .label
-    {
-        display: none;
-    }
-
-    .header-musics > a > span:first-child
-    {
-        margin-right: 0;
-    }
-
-    .header-musics > a
-    {
-        width: 40px;
-    }
-
-    @media (max-width: 767px)
-    {
-        body
-        {
-            padding: 0;
-        }
-
-        .search-entry
-        {
-            display: none;
-        }
-    }
-}
-
 /*--- Propositions ---*/
 .propositions
 {
@@ -521,11 +490,15 @@ input[type="range"]::-webkit-slider-thumb {
     /* --- HEADER --- */
     .header-musics {
         padding-top: 10px;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     .header-musics > a {
         width: 40px; /* Force les boutons ronds sans texte */
+    }
+
+    .header-musics > a > span:first-child {
+        margin-left: 10px;
     }
 
     /* Cache le texte des boutons header sur mobile */
@@ -533,11 +506,16 @@ input[type="range"]::-webkit-slider-thumb {
         display: none;
     }
 
+    .search-entry
+    {
+        display: none;
+    }
+
     /* --- PROPOSITIONS (2 Lignes avec Scroll Horizontal) --- */
     .propositions {
         display: grid;
         /* Force exactement 2 lignes de 80px de hauteur */
-        grid-template-rows: repeat(2, 80px);
+        grid-template-rows: repeat(2, 60px);
         /* Les éléments s'ajoutent en colonnes vers la droite (et non en ligne) */
         grid-auto-flow: column;
         /* Définit la largeur de chaque colonne (carte) */
@@ -599,6 +577,14 @@ input[type="range"]::-webkit-slider-thumb {
         grid-template-columns: 40px 1fr 0.5fr 40px;
     }
 
+    .table .header .btn {
+        height: 40px;
+    }
+
+    .table .header {
+        height: 50px;
+    }
+
     /* Cacher le nom de l'utilisateur des playlists pour gagner de la place */
     .playlists-infos .row span:nth-child(3) {
         display: none;
@@ -608,6 +594,23 @@ input[type="range"]::-webkit-slider-thumb {
     .listened-infos .body {
         max-height: 300px;
         overflow-y: auto;
+    }
+
+    /* --- TRONCATURE DU TEXTE (Coupe avec ...) --- */
+
+    /* On cible les éléments textes (span, div) à l'intérieur des lignes de tes tableaux */
+    .playlists-infos .row span,
+    .artists-infos .row span,
+    .listened-infos .row span,
+    .listened-infos .row div { /* Sécurité si tu utilises des div au lieu de span */
+        white-space: nowrap;      /* 1. Oblige le texte à rester sur une seule ligne */
+        overflow: hidden;         /* 2. Cache tout ce qui dépasse du conteneur */
+        text-overflow: ellipsis;  /* 3. Remplace la fin du texte coupé par "..." */
+        padding: 2px;
+
+        /* Important pour que cela fonctionne dans une Grid ou Flexbox */
+        min-width: 0;
+        display: block; /* Assure que l'élément se comporte comme un bloc pour le overflow */
     }
 
     /* --- LECTEUR (MINI BARRE & PLEIN ÉCRAN) --- */
@@ -660,8 +663,7 @@ input[type="range"]::-webkit-slider-thumb {
     }
 
     .listen .artist-listen {
-        font-size: 12px;
-        color: #666;
+        display: none;
     }
 
     /* Cacher la barre de progression en mode mini */
@@ -726,6 +728,8 @@ input[type="range"]::-webkit-slider-thumb {
     }
 
     .listen.expanded .artist-listen {
+        display: block;
+        padding-top: 6px;
         font-size: 18px;
         color: #ddd;
         text-align: center;
