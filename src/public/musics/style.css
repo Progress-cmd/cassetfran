@@ -218,6 +218,13 @@ main {
     scrollbar-width: thin;
 }
 
+.table-search > .body {
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
 .table .row:nth-child(2n) {
     background: #f2f2f2;
 }
