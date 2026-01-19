@@ -29,7 +29,7 @@
         <section class="infos">
             <article class="playlists-infos">
                 <div class="table">
-                    <div class="row header">
+                    <div class="header">
                         <span>Playlists</span>
                         <a href="./creationPlaylist.php" class="btn">
                             <span class="material-symbols-outlined">add</span>
@@ -69,11 +69,8 @@
             <div class="infos-bottom">
                 <article class="artists-infos">
                     <div class="table">
-                        <div class="row header">
+                        <div class="header">
                             <span>Artists</span>
-                            <a href="#" class="btn">
-                                <span class="material-symbols-outlined">add</span>
-                            </a>
                         </div>
                         <div class="body">
                             <?php
@@ -97,7 +94,7 @@
                 </article>
                 <article class="listened-infos">
                     <div class="table queue">
-                        <div class="row header">
+                        <div class="header">
                             <span>Liste d'attente</span>
                         </div>
                         <div class="body" id="queueList">
@@ -136,7 +133,7 @@
                 <div class="name-listen"></div>
                 <div class="artist-listen"></div>
 
-                <audio id="audio" class="audio-listen"></audio>
+                <audio id="audio"></audio>
 
                 <div class="audio-slide">
                     <div class="audio-progress">0:00</div>

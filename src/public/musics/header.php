@@ -13,7 +13,8 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>cassetfran</title>
-    <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="../css/style.css">
+<!--        <link rel="stylesheet" href="./style.css">-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
 </head>
@@ -27,7 +28,7 @@ if (!isset($_SESSION['user'])) {
         <span class="material-symbols-outlined">partner_heart</span>
         <span class="label">Share</span>
     </a>
-    <form action="#" method="post" class="form search-form">
+    <form action="./rechercher.php" method="post" class="form search-form">
         <input type="text" class="search-entry" placeholder="Search">
         <button type="submit" class="btn search-btn"><span class="material-symbols-outlined">search</span></button>
     </form>
