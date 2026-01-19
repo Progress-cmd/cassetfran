@@ -1,0 +1,776 @@
+/*--- Configurations par défaut ---*/
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+a
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+button
+{
+    border: none;
+    background: none;
+}
+
+/*--- Page ---*/
+html
+{
+    height: 100%;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Roboto Light", sans-serif;
+    background-color: #e7e8fe;
+    color: black;
+}
+
+main
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    box-sizing: border-box;
+    min-height: 0;
+}
+
+.btn
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f5ff;
+    color: #673ee6;
+}
+
+.btn:hover {
+    background: #EEE;
+    cursor: pointer;
+}
+
+.btn > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*--- Header ---*/
+.header-musics
+{
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+    padding-top: 40px;
+}
+
+.header-musics > a
+{
+    height: 40px;
+    border-radius: 20px;
+    width: 150px;
+}
+
+.header-musics > a > span:first-child
+{
+    margin-right: 10px;
+}
+
+.search-form
+{
+    display: flex;
+    height: 40px;
+    border: solid 1px transparent;
+    border-radius: 20px;
+    background: #f7f5ff;
+}
+
+.search-form:focus-within {
+    border: 1px solid #673ee6;
+}
+
+.search-entry
+{
+    background: none;
+    border: none;
+    margin-left: 15px;
+}
+
+.search-entry:focus
+{
+    outline: none;
+}
+
+.search-btn
+{
+    border-radius: 50%;
+    width: 40px;
+}
+
+/*--- Propositions ---*/
+.propositions
+{
+    display: grid;
+    grid: repeat(2, 80px) / auto-flow 25%;
+    flex-shrink: 0;
+}
+
+.propositions > div
+{
+    padding: 10px;
+}
+
+.proposition
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    background: white;
+    border-radius: 0 5px 5px 0;
+    font-size: 15px;
+}
+
+.proposition:hover
+{
+    background: #EFEFEF;
+    cursor: pointer;
+}
+
+.proposition > img
+{
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.proposition > div
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.proposition .nameTrack
+{
+    color: #AAA;
+}
+
+/*--- Musiques ---*/
+.container-music
+{
+    display: grid;
+    flex: 1;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 20px;
+    min-height: 0;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.infos
+{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    min-height: 0;
+}
+
+.infos-bottom
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+    min-height: 0;
+}
+
+.artists-infos, .playlists-infos, .listened-infos
+{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 0;
+}
+
+.table
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.table .header
+{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 20px;
+    height: 70px;
+    align-items: center;
+    padding: 0 5px 0 16px;
+}
+
+.table .header .btn {
+    border-radius: 50%;
+    height: 50px;
+    aspect-ratio: 1 / 1;
+}
+
+.table > .body
+{
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    min-height: 0;
+}
+
+.table .row:nth-child(2n)
+{
+    background: #f2f2f2;
+}
+
+.table .row:nth-child(2n+1)
+{
+    background: #ffffff;
+}
+
+.row
+{
+    display: grid;
+    align-items: center;
+    height: 50px;
+    padding: 0 16px;
+}
+
+.playlists-infos .row
+{
+    grid-template-columns: 40px 2fr 1.5fr 1fr 40px;
+}
+
+.artists-infos .row
+{
+    grid-template-columns: 1fr 40px;
+}
+
+.listened-infos .row
+{
+    grid-template-columns: 1fr 1fr 40px;
+}
+
+.row > .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: black;
+    border-radius: 15%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.row > .btn:hover {
+    background: #DDD;
+}
+
+/*--- lecture en cours ---*/
+.listen
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.info-listen
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 35px;
+    background: #673ee6;
+    border-radius: 10px 10px 0 0;
+    color: white;
+}
+
+.img-listen
+{
+    height: 250px;
+    border-radius: 5%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.name-listen
+{
+    font-size: 25px;
+    padding-top: 10px;
+}
+
+.artist-listen
+{
+    font-size: 18px;
+    padding-top: 10px;
+}
+
+.audio-listen
+{
+    margin: 20px 0 35px 0;
+}
+
+.audio-slide
+{
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+input[type="range"] {
+    margin: 0 20px 0 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    background: transparent;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0.3));
+    border-radius: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: white solid 1px;
+    background: #673ee6;
+    border-radius: 50%;
+    margin-top: -4px;
+}
+
+.button-listen
+{
+    padding-top: 30px;
+    display: grid;
+    flex-direction: column;
+    grid-template-rows: 1fr 1fr;
+    flex: 1;
+    background: white;
+    border-radius: 0 0 10px 10px;
+}
+
+.button-listen > div
+{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.button-listen > div:nth-child(1) > button
+{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.button-listen > div:nth-child(2) > button
+{
+    border-radius: 15%;
+    height: 50px;
+    width: 50px;
+}
+
+.container
+{
+    display: flex;
+    justify-content: center;
+}
+
+.container > form
+{
+    width: 750px;
+    padding: 50px;
+    border-radius: 15px;
+    background: white;
+}
+
+.container h2
+{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.container .btns
+{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.container .btn
+{
+    border: none;
+    border-radius: 5px;
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+}
+
+.table-search
+{
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+}
+
+.table-search > h2
+{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.table-search .row {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 0 16px;
+    gap: 16px;
+}
+
+.table-search .row span:nth-child(1) {
+    flex: 2;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.table-search .row span:nth-child(2) {
+    flex: 1;
+    color: #777;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.table-search .row a {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+
+/* --- RESPONSIVE MOBILE (Max 768px) --- */
+@media (max-width: 768px) {
+
+    /* --- GLOBAL & STRUCTURE --- */
+    main {
+        padding: 15px; /* Moins de padding sur mobile */
+        padding-bottom: 80px; /* Espace pour le mini-player en bas */
+        overflow-y: auto; /* Permet le scroll de la page */
+    }
+
+    /* --- HEADER --- */
+    .header-musics {
+        padding-top: 10px;
+        justify-content: space-around;
+    }
+
+    .header-musics > a {
+        width: 40px; /* Force les boutons ronds sans texte */
+    }
+
+    .header-musics > a > span:first-child {
+        margin-left: 10px;
+    }
+
+    /* Cache le texte des boutons header sur mobile */
+    .header-musics .label {
+        display: none;
+    }
+
+    .search-entry
+    {
+        display: none;
+    }
+
+    /* --- PROPOSITIONS (2 Lignes avec Scroll Horizontal) --- */
+    .propositions {
+        display: grid;
+        /* Force exactement 2 lignes de 80px de hauteur */
+        grid-template-rows: repeat(2, 60px);
+        /* Les éléments s'ajoutent en colonnes vers la droite (et non en ligne) */
+        grid-auto-flow: column;
+        /* Définit la largeur de chaque colonne (carte) */
+        grid-auto-columns: 280px;
+
+        gap: 10px;
+        overflow-x: auto; /* Active le scroll */
+        scroll-snap-type: x mandatory;
+        padding-bottom: 10px;
+
+        /* Reset de la hauteur pour qu'elle s'adapte au contenu de la grille */
+        height: auto;
+    }
+
+    .propositions > div {
+        /* On s'assure que l'élément prend toute la place de sa "case" grille */
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: start;
+        padding: 0; /* Ajustement du padding pour gagner de la place */
+    }
+
+    /* Optionnel : Ajustement de la carte elle-même pour qu'elle rentre bien */
+    .proposition {
+        border-radius: 10px; /* Un peu plus rond sur mobile */
+        width: 100%;
+    }
+
+    /* Masquer la barre de défilement (esthétique) */
+    .propositions::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* --- CONTENEUR MUSIQUE (Verticalisation) --- */
+    .container-music {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+        gap: 20px;
+    }
+
+    .infos {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .infos-bottom {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        gap: 20px;
+    }
+
+    /* --- TABLES (Playlists, Artistes, Queue) --- */
+    /* Ajustement des colonnes pour qu'elles ne soient pas écrasées */
+    .playlists-infos .row {
+        /* On simplifie l'affichage : Icône | Titre | (caché user) | Compteur | Btn */
+        grid-template-columns: 40px 1fr 0.5fr 40px;
+    }
+
+    .table .header .btn {
+        height: 40px;
+    }
+
+    .table .header {
+        height: 50px;
+    }
+
+    /* Cacher le nom de l'utilisateur des playlists pour gagner de la place */
+    .playlists-infos .row span:nth-child(3) {
+        display: none;
+    }
+
+    /* Limiter la hauteur de la liste d'attente pour ne pas avoir une page infinie */
+    .listened-infos .body {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    /* --- TRONCATURE DU TEXTE (Coupe avec ...) --- */
+
+    /* On cible les éléments textes (span, div) à l'intérieur des lignes de tes tableaux */
+    .playlists-infos .row span,
+    .artists-infos .row span,
+    .listened-infos .row span,
+    .listened-infos .row div { /* Sécurité si tu utilises des div au lieu de span */
+        white-space: nowrap;      /* 1. Oblige le texte à rester sur une seule ligne */
+        overflow: hidden;         /* 2. Cache tout ce qui dépasse du conteneur */
+        text-overflow: ellipsis;  /* 3. Remplace la fin du texte coupé par "..." */
+        padding: 2px;
+
+        /* Important pour que cela fonctionne dans une Grid ou Flexbox */
+        min-width: 0;
+        display: block; /* Assure que l'élément se comporte comme un bloc pour le overflow */
+    }
+
+    /* --- LECTEUR (MINI BARRE & PLEIN ÉCRAN) --- */
+
+    /* État par défaut : Mini Player en bas */
+    .listen {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px; /* Hauteur réduite */
+        z-index: 1000;
+        margin: 0;
+        background: #f7f5ff; /* Fond clair pour le mini player */
+        border-top: 1px solid #ddd;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 10px;
+        box-sizing: border-box;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+
+    /* Restructuration interne pour le mode Mini */
+    .listen .info-listen {
+        padding-top: 0;
+        background: none;
+        color: black;
+        flex-direction: row;
+        width: 70%;
+        border-radius: 0;
+        align-items: center;
+    }
+
+    /* Image en mode mini : toute petite */
+    .listen .img-listen {
+        height: 50px;
+        width: 50px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .listen .name-listen, .listen .artist-listen {
+        font-size: 14px;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+    }
+
+    .listen .artist-listen {
+        display: none;
+    }
+
+    /* Cacher la barre de progression en mode mini */
+    .listen .audio-slide {
+        display: none;
+    }
+
+    /* Ajuster les boutons en mode mini */
+    .listen .button-listen {
+        padding-top: 0;
+        background: none;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .listen .button-listen > div {
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    /* Cacher les boutons non essentiels en mode mini (Shuffle, Repeat, Volume...) */
+    .listen .button-listen .relisten-listen,
+    .listen .button-listen .random-listen,
+    .listen .button-listen > div:nth-child(2) {
+        display: none;
+    }
+
+    /* --- ÉTAT EXPANDED (Plein écran au clic) --- */
+    .listen.expanded {
+        height: 100vh; /* Pleine hauteur */
+        flex-direction: column;
+        justify-content: flex-end;
+        background: white; /* Ou couleur de fond unie */
+        padding: 0;
+    }
+
+    .listen.expanded .info-listen {
+        width: 100%;
+        height: 60%;
+        background: #673ee6; /* Retour au violet */
+        color: white;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 0 0 20px 20px;
+        padding-top: 40px;
+    }
+
+    .listen.expanded .img-listen {
+        height: 250px;
+        width: 250px;
+        margin: 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .listen.expanded .name-listen {
+        font-size: 24px;
+        margin-top: 20px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .listen.expanded .artist-listen {
+        display: block;
+        padding-top: 6px;
+        font-size: 18px;
+        color: #ddd;
+        text-align: center;
+    }
+
+    /* Réafficher la barre de progression */
+    .listen.expanded .audio-slide {
+        display: flex;
+        width: 90%;
+        margin-top: 30px;
+    }
+
+    .listen.expanded .button-listen {
+        height: 40%;
+        flex-direction: column;
+        padding-top: 20px;
+        display: grid;
+    }
+
+    /* Réafficher tous les boutons */
+    .listen.expanded .button-listen .relisten-listen,
+    .listen.expanded .button-listen .random-listen,
+    .listen.expanded .button-listen > div:nth-child(2) {
+        display: flex;
+    }
+
+    .listen.expanded .button-listen > div {
+        justify-content: space-around;
+    }
+
+    /* Ajout d'une petite flèche pour indiquer qu'on peut fermer (optionnel, via CSS content) */
+    .listen.expanded::before {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 5px;
+        background: rgba(255,255,255,0.3);
+        border-radius: 5px;
+        z-index: 1001;
+    }
+}
