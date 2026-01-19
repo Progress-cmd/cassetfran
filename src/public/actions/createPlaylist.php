@@ -10,13 +10,16 @@ if (
 
 $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
 
-// Connexion à la base de données
-include_once "../config.php";
-$pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
+if ($name != null && $name != '')
+{
+    // Connexion à la base de données
+    include_once "../config.php";
+    $pdo = new PDO("mysql:host=" . config::$HOST . ";dbname=" . config::$DBNAME, config::$USER, config::$PASSWORD);
 
-$req = $pdo->prepare("INSERT INTO playlists (name, `created-by_id`) VALUES (:name, :user)");
-$req->bindParam(':name', $name);
-$req->bindParam(':user', $_SESSION['user']['id']);
-$req->execute();
+    $req = $pdo->prepare("INSERT INTO playlists (name, `created-by_id`) VALUES (:name, :user)");
+    $req->bindParam(':name', $name);
+    $req->bindParam(':user', $_SESSION['user']['id']);
+    $req->execute();
+}
 
 header('Location: ../musics/index.php');
