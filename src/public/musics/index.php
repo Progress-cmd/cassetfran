@@ -21,7 +21,7 @@
 
             $track = $req->fetchAll();
 
-            echo '<div><button class="proposition"><img src='.$track[0]["img"].' alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
+            echo '<div><button class="proposition" data-track-id="'.$listTrack.'"><img src='.$track[0]["img"].' alt="image" class="miniature"/><div><div class="titleTrack">'.$track[0]["title"].'</div><div class="nameTrack">'.$track[0]["name"].'</div></div></button></div>';
         }
         ?>
     </section>
@@ -116,6 +116,7 @@
 
             foreach ($tracks as $track) {
                 $playlist[] = [
+                        "id" => $track["id"],
                         "src" => "../downloads/musics/".$track["file"],
                         "title" => $track["title"],
                         "artist" => $track["name"],
@@ -176,6 +177,8 @@
             </article>
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
+                    const propositions = document.querySelectorAll(".proposition");
+
                     const queueList = document.getElementById("queueList");
 
                     const audio = document.getElementById("audio");
@@ -197,6 +200,27 @@
                     const volumeIcon = document.getElementById("volumeIcon");
 
                     let currentIndex = 0;
+
+                    propositions.forEach(btn => {
+                        btn.addEventListener("click", async () => {
+                            const trackId = btn.dataset.trackId;
+
+                            const response = await fetch(`../actions/getTrack.php?id=${trackId}`);
+                            const track = await response.json();
+
+                            if (!track || !track.src) return;
+
+                            audio.src = track.src;
+                            audio.play();
+
+                            titleEl.textContent = track.title;
+                            artistEl.textContent = track.artist;
+                            imgEl.src = track.img;
+
+                            playIcon.textContent = "pause";
+                        });
+                    });
+
 
                     function renderQueue() {
                         queueList.innerHTML = "";
