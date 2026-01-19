@@ -14,8 +14,10 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
 
                 <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 
-                <input type="submit" value="Submit" class="btn">
-                <a href="./index.php" class="btn">Retour</a>
+                <div class="btns">
+                    <input type="submit" value="Submit" class="btn">
+                    <a href="./index.php" class="btn">Retour</a>
+                </div>
             </div>
         </form>
     </article>

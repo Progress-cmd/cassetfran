@@ -13,13 +13,13 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>cassetfran</title>
-        <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
 </head>
 <body>
 <header class="header-musics">
-    <a href="./index.php" class="btn home-btn">
+    <a href="../index.php" class="btn home-btn">
         <span class="material-symbols-outlined">home</span>
         <span class="label">Home</span>
     </a>

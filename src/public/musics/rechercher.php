@@ -13,10 +13,8 @@ $tracks = $req->fetchAll();
 
 <main>
     <section>
-        <div class="table table-search" style="height: 100%;">
-            <div class="row header">
-                <span>Résultats :</span>
-            </div>
+        <div class="table table-search">
+            <h2>Résultats : </h2>
             <div class="body">
                 <?php foreach ($tracks as $track)
                     {

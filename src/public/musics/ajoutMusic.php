@@ -18,8 +18,10 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
 
                         <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
 
-                        <button type="submit" class="btn">Voir</button>
-                        <a href="./index.php" class="btn">Retour</a>
+                        <div class="btns">
+                            <button type="submit" class="btn">Voir</button>
+                            <a href="./index.php" class="btn">Retour</a>
+                        </div>
                     </div>
                 </form>
             </article>
@@ -90,8 +92,10 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
                             <input type="hidden" value="<?php echo $_POST['url'] ?>" name="url">
                             <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
 
-                            <button type="submit" class="btn">Télécharger</button>
-                            <a href="./index.php" class="btn">Retour</a>
+                            <div class="btns">
+                                <input type="submit" class="btn" value="Download">
+                                <a href="./index.php" class="btn">Retour</a>
+                            </div>
                         </div>
                     </form>
                 </article>
