@@ -1,4 +1,4 @@
-<?php include './header.php';
+<?php include '../header.php';
 
 $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
 
@@ -20,7 +20,7 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
 
                         <div class="btns">
                             <button type="submit" class="btn">Voir</button>
-                            <a href="./index.php" class="btn">Retour</a>
+                            <a href="../index.php" class="btn">Retour</a>
                         </div>
                     </div>
                 </form>
@@ -94,7 +94,7 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
 
                             <div class="btns">
                                 <input type="submit" class="btn" value="Download">
-                                <a href="./index.php" class="btn">Retour</a>
+                                <a href="../index.php" class="btn">Retour</a>
                             </div>
                         </div>
                     </form>

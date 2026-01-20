@@ -13,7 +13,7 @@ $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
 if ($name != null && $name != '')
 {
     // Connexion à la base de données
-    include_once "../config.php";
+    include_once "../../includes/config.php";
     $pdo = new PDO("mysql:host=" . config::$HOST . ";dbname=" . config::$DBNAME, config::$USER, config::$PASSWORD);
 
     $req = $pdo->prepare("INSERT INTO playlists (name, `created-by_id`) VALUES (:name, :user)");
@@ -22,4 +22,4 @@ if ($name != null && $name != '')
     $req->execute();
 }
 
-header('Location: ../musics/index.php');
+header('Location: ../index.php');

@@ -1,8 +1,8 @@
-<?php include './header.php';
+<?php include '../header.php';
 
 $recherche = filter_input(INPUT_POST, 'recherche', FILTER_DEFAULT);
 
-include '../config.php';
+include '../../includes/config.php';
 $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
 $req = $pdo->prepare("SELECT * FROM tracks JOIN artist__track ON artist__track.track_id = tracks.id LEFT JOIN artists ON artists.id = artist__track.artist_id");

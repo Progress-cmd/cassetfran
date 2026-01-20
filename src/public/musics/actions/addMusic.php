@@ -27,7 +27,7 @@ if ($code !== 0) {
 }
 
 // Connexion à la base de données
-include_once "../config.php";
+include_once "../../includes/config.php";
 $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
 $req = $pdo->prepare("INSERT INTO tracks (title, duration, file, url, img, `added-by_id`) VALUES (:title, :duration, :file, :url, :img, :user)");
@@ -65,4 +65,4 @@ $req->bindParam(':artist_id', $artist_id);
 $req->bindParam(':track_id', $track_id);
 $req->execute();
 
-header("Location: ../musics/index.php");
+header("Location: ../index.php");

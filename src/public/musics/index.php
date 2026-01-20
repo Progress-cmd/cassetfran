@@ -2,7 +2,7 @@
 
 <main>
     <?php
-    include_once "../config.php";
+    include_once "../includes/config.php";
     $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
     $req = $pdo->prepare("SELECT id FROM tracks ORDER BY RAND() LIMIT 8");
@@ -31,7 +31,7 @@
                 <div class="table">
                     <div class="header">
                         <span>Playlists</span>
-                        <a href="./creationPlaylist.php" class="btn">
+                        <a href="./includes/creationPlaylist.php" class="btn">
                             <span class="material-symbols-outlined">add</span>
                         </a>
                     </div>

@@ -1,5 +1,5 @@
 <?php
-include_once "../config.php";
+include_once "../../includes/config.php";
 $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
 $id = (int)$_GET['id'];

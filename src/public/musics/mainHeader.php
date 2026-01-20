@@ -13,7 +13,7 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>cassetfran</title>
-    <link rel="stylesheet" href="../css/styleMusics.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap">
 </head>
@@ -27,15 +27,15 @@ if (!isset($_SESSION['user'])) {
         <span class="material-symbols-outlined">partner_heart</span>
         <span class="label">Share</span>
     </a>
-    <form action="./rechercher.php" method="post" class="form search-form">
+    <form action="./includes/rechercher.php" method="post" class="form search-form">
         <input type="text" class="search-entry" placeholder="Search">
         <button type="submit" class="btn search-btn"><span class="material-symbols-outlined">search</span></button>
     </form>
-    <a href="./ajoutMusic.php?etape=0" class="btn add-btn">
+    <a href="./includes/ajoutMusic.php?etape=0" class="btn add-btn">
         <span class="material-symbols-outlined">music_note_add</span>
         <span class="label">Add music</span>
     </a>
-    <a href="../connexion.php" class="btn login-btn">
+    <a href="../includes/connexion.php" class="btn login-btn">
         <span class="material-symbols-outlined">account_circle</span>
         <span class="label">Account</span>
     </a>

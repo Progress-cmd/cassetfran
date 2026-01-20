@@ -148,6 +148,7 @@ main
     background: #EFEFEF;
     cursor: pointer;
     transform: translate(-1px, -1px);
+    box-shadow: lightgray 1px 1px;
 }
 
 .proposition > img

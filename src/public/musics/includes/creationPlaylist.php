@@ -1,4 +1,4 @@
-<?php include './header.php';
+<?php include '../header.php';
 
 $_SESSION['token'] = bin2hex(random_bytes(32));
 
@@ -16,7 +16,7 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
 
                 <div class="btns">
                     <input type="submit" value="Submit" class="btn">
-                    <a href="./index.php" class="btn">Retour</a>
+                    <a href="../index.php" class="btn">Retour</a>
                 </div>
             </div>
         </form>
