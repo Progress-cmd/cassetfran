@@ -51,6 +51,7 @@ main
     justify-content: center;
     background: #f7f5ff;
     color: #673ee6;
+    transition: background-color 500ms;
 }
 
 .btn:hover {
@@ -139,12 +140,14 @@ main
     background: white;
     border-radius: 0 5px 5px 0;
     font-size: 15px;
+    transition: background-color 500ms;
 }
 
 .proposition:hover
 {
     background: #EFEFEF;
     cursor: pointer;
+    transform: translate(-1px, -1px);
 }
 
 .proposition > img
@@ -226,10 +229,32 @@ main
     padding: 0 5px 0 16px;
 }
 
-.table .header .btn {
+.table .header .btn
+{
     border-radius: 50%;
     height: 50px;
-    aspect-ratio: 1 / 1;
+    width: 50px;
+    pointer-events: auto;
+}
+
+.table .header .btn > span
+{
+    height: 100%;
+    width: 100%;
+}
+
+.table .header .btn:hover span
+{
+    animation: spinOnce 1s ease forwards;
+}
+
+@keyframes spinOnce {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(90deg);
+    }
 }
 
 .table > .body
@@ -295,7 +320,7 @@ main
 {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    margin: 0 10px 0 10px;
 }
 
 .info-listen
