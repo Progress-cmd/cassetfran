@@ -28,4 +28,4 @@ $_SESSION['token'] = bin2hex(random_bytes(32));
     </div>
 </main>
 
-<?php include './footer.php' ?>
+<?php include '../footer.php' ?>
