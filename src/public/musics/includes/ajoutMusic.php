@@ -13,7 +13,7 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
                 <form action="./ajoutMusic.php?etape=1" method="post">
                     <h2>Ajout d'une musique</h2>
                     <div>
-                        <label>URL (Youtube music) :</label>
+                        <label>URL :</label>
                         <input type="url" name="url" placeholder="Lien YouTube Music" required>
 
                         <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">

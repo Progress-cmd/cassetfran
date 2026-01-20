@@ -291,6 +291,11 @@ main
     grid-template-columns: 40px 2fr 1.5fr 1fr 40px;
 }
 
+.playlist-row {
+    display: grid; /* obligatoire car <a> est inline par défaut */
+    color: inherit;
+}
+
 .artists-infos .row
 {
     grid-template-columns: 1fr 40px;

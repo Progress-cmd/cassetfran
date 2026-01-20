@@ -50,7 +50,7 @@
 
                                 $occurrence = $req->fetchColumn();
                                 ?>
-                                <div class="row">
+                                <a href="./includes/playlist.php?id=<?= $playlist['id'] ?>" class="row playlist-row">
                                     <span class="img-playlists-infos material-symbols-outlined">
                                     <?php if ($playlist["name"] == "Favorite Tracks") { echo "favorite"; }
                                         else if ($playlist["name"] == "Instru Piano") { echo "piano"; } ?>
@@ -58,8 +58,8 @@
                                     <span><?php echo $playlist["name"]; ?></span>
                                     <span><?php echo $playlist["username"]; ?></span>
                                     <span><?php if ($occurrence > 1) { echo $occurrence.' musiques'; } else { echo $occurrence.' musique'; } ?></span>
-                                    <a href="#" class="btn"><span class="material-symbols-outlined">more_vert</span></a>
-                                </div>
+                                    <button class="btn"><span class="material-symbols-outlined">more_vert</span></button>
+                                </a>
                                 <?php
                             }
                         ?>
@@ -203,20 +203,45 @@
 
                     propositions.forEach(btn => {
                         btn.addEventListener("click", async () => {
-                            const trackId = btn.dataset.trackId;
+                            const trackId = parseInt(btn.dataset.trackId, 10);
 
-                            const response = await fetch(`../actions/getTrack.php?id=${trackId}`);
+                            const response = await fetch(`./actions/getTrack.php?id=${trackId}`);
                             const track = await response.json();
-
                             if (!track || !track.src) return;
 
-                            audio.src = track.src;
+                            // Cherche si le morceau est déjà dans la playlist
+                            const existingIndex = playlist.findIndex(t => t.id === track.id);
+
+                            // Si le morceau est déjà en cours de lecture
+                            if (existingIndex === currentIndex) {
+                                return;
+                            }
+
+                            // Si le morceau existe plus loin dans la playlist, on le retire
+                            if (existingIndex !== -1) {
+                                playlist.splice(existingIndex, 1);
+
+                                // Ajustement de l’index courant si nécessaire
+                                if (existingIndex < currentIndex) {
+                                    currentIndex--;
+                                }
+                            }
+
+                            const trackObj = {
+                                id: track.id,
+                                src: track.src,
+                                title: track.title,
+                                artist: track.artist,
+                                img: track.img,
+                                duration: track.duration
+                            };
+
+                            // Insertion juste après le morceau courant
+                            playlist.splice(currentIndex + 1, 0, trackObj);
+                            currentIndex++;
+
+                            loadTrack(currentIndex);
                             audio.play();
-
-                            titleEl.textContent = track.title;
-                            artistEl.textContent = track.artist;
-                            imgEl.src = track.img;
-
                             playIcon.textContent = "pause";
                         });
                     });
@@ -248,13 +273,11 @@
 
                             queueList.appendChild(row);
                         });
+                        document.querySelector(".queue .row.active")?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest"
+                        });
                     }
-
-                    document.querySelector(".queue .row.active")?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "nearest"
-                    });
-
 
                     function formatTime(seconds) {
                         const m = Math.floor(seconds / 60);

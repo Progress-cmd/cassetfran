@@ -5,7 +5,7 @@ $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$
 $id = (int)$_GET['id'];
 
 $req = $pdo->prepare("
-    SELECT tracks.file, tracks.title, tracks.img, artists.name
+    SELECT tracks.id, tracks.file, tracks.title, tracks.img, artists.name, tracks.duration
     FROM tracks
     LEFT JOIN artist__track ON artist__track.track_id = tracks.id
     LEFT JOIN artists ON artists.id = artist__track.artist_id
@@ -22,8 +22,10 @@ if (!$track) {
 }
 
 echo json_encode([
+    "id" => $track["id"],
     "src" => "../downloads/musics/".$track["file"],
     "title" => $track["title"],
     "artist" => $track["name"],
-    "img" => $track["img"]
+    "img" => $track["img"],
+    "duration" => $track["duration"]
 ]);
