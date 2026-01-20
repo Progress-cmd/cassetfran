@@ -1,4 +1,4 @@
-<?php include '../header.php';
+<?php include './header.php';
 
 $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
 
@@ -56,7 +56,7 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
             $thumb = $data['thumbnails'][count($data['thumbnails'])-1]['url'] ?? null;
 
             // Connexion à la base de données
-            include_once "../config.php";
+            include_once "../../includes/config.php";
             $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
 
             $req = $pdo->prepare("SELECT title FROM tracks WHERE title = :title");

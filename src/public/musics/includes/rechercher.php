@@ -1,4 +1,4 @@
-<?php include '../header.php';
+<?php include './header.php';
 
 $recherche = filter_input(INPUT_POST, 'recherche', FILTER_DEFAULT);
 

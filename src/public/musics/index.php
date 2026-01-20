@@ -1,4 +1,4 @@
-<?php include './mainHeader.php'; ?>
+<?php include './header.php'; ?>
 
 <main>
     <?php

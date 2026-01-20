@@ -1,4 +1,4 @@
-<?php include '../header.php';
+<?php include './header.php';
 
 $_SESSION['token'] = bin2hex(random_bytes(32));
 
