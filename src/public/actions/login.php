@@ -13,7 +13,7 @@ $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 
 // Connexion à la base de données
 include_once "../includes/config.php";
-$pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
+$pdo = new PDO("mysql:host=".config::$HOST.";dbname=".Config::$DBNAME, Config::$USER, Config::$PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 
 $req = $pdo->prepare("SELECT id, username, email, `password-hash` FROM users WHERE email = :email");
 $req->bindValue(':email', $email);
@@ -33,7 +33,7 @@ if ($user != NULL && $initPassword)
     $req->execute();
 
     $_SESSION['user'] = ['id' => $user['id'], 'username' => $user['username'], 'email' => $user['email']];
-    header('Location: /public/index.php');
+    header('Location: /index.php');
 }
 
 if ($user != NULL && password_verify($password, $user['password-hash']) && $user['password-hash'] != NULL)
@@ -42,10 +42,10 @@ if ($user != NULL && password_verify($password, $user['password-hash']) && $user
 
     $_SESSION['user'] = ['id' => $user['id'], 'username' => $user['username'], 'email' => $user['email']];
 
-    header('Location: /public/index.php');
+    header('Location: /index.php');
 }
 else
 {
-    header("Location: /public/includes/connexion.php");
+    header("Location: /includes/connexion.php");
     echo "Identifiant ou mot de passe incorrect";
 }

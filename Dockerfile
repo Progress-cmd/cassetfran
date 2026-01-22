@@ -6,10 +6,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     python3 \
-    && apt-get clean
+    && rm -rf /var/lib/apt/lists/*
 
 # yt-dlp
-RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp \
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/download/2024.01.07/yt-dlp \
     -o /usr/local/bin/yt-dlp \
     && chmod a+rx /usr/local/bin/yt-dlp
 
@@ -29,4 +29,6 @@ COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 WORKDIR /var/www/html
 
 # Copier code
-COPY ./src/ /var/www/html/
+#COPY ./src /var/www/html
+
+EXPOSE 80
