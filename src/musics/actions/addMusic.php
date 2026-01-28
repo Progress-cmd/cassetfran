@@ -14,8 +14,9 @@ $duration = filter_input(INPUT_POST, 'duration', FILTER_DEFAULT);
 $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
 $miniature = filter_input(INPUT_POST, 'miniature', FILTER_DEFAULT);
 $output_path = "/var/www/music_data/%(title)s.%(ext)s";
+$file = $title.".mp3";
 $safe_url = escapeshellarg($url);
-$cmd = "/usr/local/bin/yt-dlp -x --audio-format mp3 --audio-quality 0 --add-metadata -o --restrict-filenames " . escapeshellarg($output_path) . " " . $safe_url;
+$cmd = "/usr/local/bin/yt-dlp -x --audio-format mp3 --audio-quality 0 --add-metadata --no-overwrites -o " . escapeshellarg($output_path) . " " . $safe_url . " 2>&1";
 
 exec($cmd, $output, $code);
 

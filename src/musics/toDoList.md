@@ -1,4 +1,11 @@
 # Deuxième étape (le lancement)
+
+## Les bugs
+- Lorsque j'entre un url valide mais que ce n'est pas un id dedans (une recherche dans l'url par exemple)
+- Les noms de musics sont parfois à ralonge, (remaster date) par exemple
+- Les noms de musiques ne sont pas toujours bien enregistré, les caractères un minimum spéciaux peuvent faire tout planter
+- Les musiques multi artistes ne sont pas bien traitées
+
 ## Les parties fonctionnelles :
 
 ### - La sécurité

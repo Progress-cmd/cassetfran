@@ -117,7 +117,7 @@
             foreach ($tracks as $track) {
                 $playlist[] = [
                         "id" => $track["id"],
-                        "src" => "../downloads/musics/".$track["file"],
+                        "src" => $track["file"],
                         "title" => $track["title"],
                         "artist" => $track["name"],
                         "img" => $track["img"],
@@ -288,7 +288,7 @@
                     function loadTrack(index) {
                         const track = playlist[index];
 
-                        audio.src = track.src;
+                        audio.src = "./actions/stream.php?file=" + track.src;
                         audio.load();
 
                         titleEl.textContent = track.title;

@@ -23,7 +23,7 @@ if (!$track) {
 
 echo json_encode([
     "id" => $track["id"],
-    "src" => "../downloads/musics/".$track["file"],
+    "src" => $track["file"],
     "title" => $track["title"],
     "artist" => $track["name"],
     "img" => $track["img"],
