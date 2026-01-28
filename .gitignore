@@ -1,6 +1,6 @@
-.idea
 musiques_stockage/
-bdd/
-*.log
+mysql_init/
 docker-compose.yml
+*.log
+.idea
 .env
