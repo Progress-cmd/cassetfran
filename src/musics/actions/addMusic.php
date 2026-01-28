@@ -13,10 +13,9 @@ $artist = filter_input(INPUT_POST, 'artist', FILTER_DEFAULT);
 $duration = filter_input(INPUT_POST, 'duration', FILTER_DEFAULT);
 $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
 $miniature = filter_input(INPUT_POST, 'miniature', FILTER_DEFAULT);
-$downloadDir = '/var/www/html/public/downloads/musics';  // chemin absolu dans le conteneur
-$file_name = $title.'.mp3';
-$file = $downloadDir.'/'.$file_name;
-$cmd = "yt-dlp -f bestaudio -x --audio-format mp3 --audio-quality 0 -o \"$downloadDir/%(title)s.%(ext)s\" \"$url\"";
+$output_path = "/var/www/music_data/%(title)s.%(ext)s";
+$safe_url = escapeshellarg($url);
+$cmd = "/usr/local/bin/yt-dlp -x --audio-format mp3 --audio-quality 0 --add-metadata -o --restrict-filenames " . escapeshellarg($output_path) . " " . $safe_url;
 
 exec($cmd, $output, $code);
 
@@ -28,7 +27,7 @@ if ($code !== 0) {
 
 // Connexion à la base de données
 include_once "../../includes/config.php";
-$pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
+$pdo = new PDO("mysql:host=".config::$HOST.";dbname=".Config::$NAME, Config::$USER, Config::$PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]);
 
 $req = $pdo->prepare("INSERT INTO tracks (title, duration, file, url, img, `added-by_id`) VALUES (:title, :duration, :file, :url, :img, :user)");
 $req->bindParam(':title', $title);

@@ -3,7 +3,7 @@
 <main>
     <?php
     include_once "../includes/config.php";
-    $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
+    $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".Config::$NAME, Config::$USER, Config::$PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]);
 
     $req = $pdo->prepare("SELECT id FROM tracks ORDER BY RAND() LIMIT 8");
     $req->execute();
@@ -31,7 +31,7 @@
                 <div class="table">
                     <div class="header">
                         <span>Playlists</span>
-                        <a href="./includes/creationPlaylist.php" class="btn">
+                        <a href="includes/creationPlaylist.php" class="btn">
                             <span class="material-symbols-outlined">add</span>
                         </a>
                     </div>
@@ -50,7 +50,7 @@
 
                                 $occurrence = $req->fetchColumn();
                                 ?>
-                                <a href="./includes/playlist.php?id=<?= $playlist['id'] ?>" class="row playlist-row">
+                                <a href="includes/playlist.php?id=<?= $playlist['id'] ?>" class="row playlist-row">
                                     <span class="img-playlists-infos material-symbols-outlined">
                                     <?php if ($playlist["name"] == "Favorite Tracks") { echo "favorite"; }
                                         else if ($playlist["name"] == "Instru Piano") { echo "piano"; } ?>

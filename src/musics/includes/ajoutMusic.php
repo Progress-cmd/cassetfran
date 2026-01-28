@@ -10,7 +10,7 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
             $_SESSION['token'] = bin2hex(random_bytes(32));
             ?>
             <article class="container">
-                <form action="./ajoutMusic.php?etape=1" method="post">
+                <form action="ajoutMusic.php?etape=1" method="post">
                     <h2>Ajout d'une musique</h2>
                     <div>
                         <label>URL :</label>
@@ -57,7 +57,7 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
 
             // Connexion à la base de données
             include_once "../../includes/config.php";
-            $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".config::$DBNAME, config::$USER, config::$PASSWORD);
+            $pdo = new PDO("mysql:host=".config::$HOST.";dbname=".Config::$NAME, Config::$USER, Config::$PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]);
 
             $req = $pdo->prepare("SELECT title FROM tracks WHERE title = :title");
             $req->bindParam(':title', $title);
@@ -67,7 +67,7 @@ $etape = filter_input(INPUT_GET, 'etape', FILTER_DEFAULT);
             {
                 ?>
                 <article class="container">
-                    <form method="POST" action="../actions/addMusic.php">
+                    <form method="post" action="../actions/addMusic.php">
                         <h2>Est-ce bien celle-ci ?</h2>
                         <div>
                             <label>Title :</label>

@@ -4,3 +4,4 @@ bdd/
 *.log
 docker-compose.dev.yml
 docker-compose.yml
+.env

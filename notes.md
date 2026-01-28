@@ -5,4 +5,4 @@
 - requête sql
 
 # container
-- ```docker compose exec -it web bash```
+- ```docker compose exec -it app bash```

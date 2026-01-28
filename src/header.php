@@ -9,7 +9,7 @@
 </head>
 <body>
 <header>
-    <h1><a href="./index.php">Notre petit monde à tout les deux</a></h1>
+    <h1><a href="index.php">Notre petit monde à tout les deux</a></h1>
     <a href="./includes/connexion.php" class="btn login-btn">
         <span class="material-symbols-outlined">account_circle</span>
         <span class="label">Account</span>

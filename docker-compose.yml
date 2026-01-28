@@ -1,24 +1,37 @@
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:80"
-    depends_on:
-      - db
-
   db:
-    image: mysql:8.0
+    image: mariadb:10.11
+    container_name: music_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: cassetfran_bdd
-      MYSQL_USER: cassetfran
-      MYSQL_PASSWORD: 03/10/2025
-    command: --default-authentication-plugin=mysql_native_password
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
     volumes:
+      - ./mysql_init:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      target: ${DOCKER_TARGET}
+    container_name: music_app
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+    volumes:
+      # Montage du code (Actif seulement si target=dev dans le .env)
+      - ./src:/var/www/html
+      # Stockage persistant des musiques
+      - ./musiques_stockage:/var/www/music_data
+    ports:
+      - "${PORT_EXPOSE}:80"
 
 volumes:
   db_data:
